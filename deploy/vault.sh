@@ -70,11 +70,11 @@ vault_deploy() {
 
   # JSON does not allow multiline strings.
   # So replacing new-lines with "\n" here
-  _ckey=$(sed -z 's/\n/\\n/g' <"$2")
-  _ccert=$(sed -z 's/\n/\\n/g' <"$3")
-  _cca=$(sed -z 's/\n/\\n/g' <"$4")
-  _cfullchain=$(sed -z 's/\n/\\n/g' <"$5")
-
+  _ckey=$(awk '{printf "%s\\n",$0}' <"$2")
+  _ccert=$(awk '{printf "%s\\n",$0}' <"$3")
+  _cca=$(awk '{printf "%s\\n",$0}' <"$4")
+  _cfullchain=$(awk '{printf "%s\\n",$0}' <"$5")
+  
   export _H1="X-Vault-Token: $VAULT_TOKEN"
 
   if [ -n "$VAULT_RENEW_TOKEN" ]; then
